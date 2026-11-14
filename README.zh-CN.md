@@ -6,7 +6,7 @@
 
 ![AutoResumeGoal](assets/hero-wordmark.webp)
 
-> 私有审阅预览。监控服务在使用 systemd 的 Linux 上运行。
+> Linux 预览版。监控服务在使用 systemd 的 Linux 上运行。
 
 ## 实际运行
 
@@ -80,3 +80,7 @@ python3 -m unittest discover -s tests -v
 [Codex Auto Resume](https://github.com/progressrdx/codex-auto-resume) · [unsnooze](https://github.com/saaranshM/unsnooze) · [Goal Ledger](https://github.com/kingbootoshi/goal-ledger)
 
 [SKILL.md](skills/auto-resume-goal/SKILL.md) · [Codex Goals](https://learn.chatgpt.com/docs/long-running-work) · [App Server](https://learn.chatgpt.com/docs/app-server)
+
+## 许可证
+
+[MIT](LICENSE)

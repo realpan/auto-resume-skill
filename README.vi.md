@@ -6,7 +6,7 @@
 
 ![AutoResumeGoal](assets/hero-wordmark.webp)
 
-> Bản xem trước để đánh giá riêng. Dịch vụ theo dõi chạy trên Linux có systemd.
+> Bản xem trước cho Linux. Dịch vụ theo dõi chạy trên Linux có systemd.
 
 ## Minh họa thực tế
 
@@ -18,7 +18,7 @@ Bảng bên hiển thị trạng thái Goal, thời điểm kiểm tra hạn m�
 
 ## Bắt đầu nhanh
 
-Chạy các lệnh dưới đây trên máy Linux nơi Goal chạy. Bạn cần có quyền truy cập GitHub để sao chép kho riêng tư. Kiểm tra bản cài đặt hiện có trước khi sao chép. Nếu không thấy `$auto-resume-goal` trong danh sách kỹ năng, hãy khởi động lại Codex.
+Chạy các lệnh dưới đây trên máy Linux nơi Goal chạy. Kiểm tra bản cài đặt hiện có trước khi sao chép. Nếu không thấy `$auto-resume-goal` trong danh sách kỹ năng, hãy khởi động lại Codex.
 
 ```bash
 git clone https://github.com/realpan/auto-resume-skill.git
@@ -80,3 +80,7 @@ Các bài kiểm thử bao gồm lịch đặt lại, kiểm tra hạn mức, nh
 [Codex Auto Resume](https://github.com/progressrdx/codex-auto-resume) · [unsnooze](https://github.com/saaranshM/unsnooze) · [Goal Ledger](https://github.com/kingbootoshi/goal-ledger)
 
 [SKILL.md](skills/auto-resume-goal/SKILL.md) · [Codex Goals](https://learn.chatgpt.com/docs/long-running-work) · [App Server](https://learn.chatgpt.com/docs/app-server)
+
+## Giấy phép
+
+[MIT](LICENSE)

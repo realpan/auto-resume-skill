@@ -6,7 +6,7 @@
 
 ![AutoResumeGoal](assets/hero-wordmark.webp)
 
-> 비공개 검토 버전입니다. 모니터는 systemd를 사용하는 Linux에서 실행됩니다.
+> Linux 미리보기 버전입니다. 모니터는 systemd를 사용하는 Linux에서 실행됩니다.
 
 ## 실행 화면
 
@@ -18,7 +18,7 @@
 
 ## 빠른 시작
 
-Goal이 실행되는 Linux 호스트에서 다음 명령을 실행합니다. 비공개 저장소를 복제하려면 접근 권한이 있는 GitHub 계정이 필요합니다. 설치 전에 기존 사본을 확인하세요. 스킬 선택기에 `$auto-resume-goal`이 나타나지 않으면 Codex를 다시 시작합니다.
+Goal이 실행되는 Linux 호스트에서 다음 명령을 실행합니다. 설치 전에 기존 사본을 확인하세요. 스킬 선택기에 `$auto-resume-goal`이 나타나지 않으면 Codex를 다시 시작합니다.
 
 ```bash
 git clone https://github.com/realpan/auto-resume-skill.git
@@ -80,3 +80,7 @@ python3 -m unittest discover -s tests -v
 [Codex Auto Resume](https://github.com/progressrdx/codex-auto-resume) · [unsnooze](https://github.com/saaranshM/unsnooze) · [Goal Ledger](https://github.com/kingbootoshi/goal-ledger)
 
 [SKILL.md](skills/auto-resume-goal/SKILL.md) · [Codex Goals](https://learn.chatgpt.com/docs/long-running-work) · [App Server](https://learn.chatgpt.com/docs/app-server)
+
+## 라이선스
+
+[MIT](LICENSE)

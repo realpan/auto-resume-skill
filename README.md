@@ -10,7 +10,7 @@
 
 AutoResumeGoal is an opt-in Codex skill for long-running Goals on Linux. A local systemd user service watches the Goal you choose. If Codex stops it because of a usage limit, the service waits for ordinary quota to become available, then resumes the same Goal with its original objective and budget.
 
-> **Private review preview.** The monitor runs on Linux with systemd. The screenshots and validation below describe observed behavior on the development setup.
+> **Linux preview.** The monitor runs on Linux with systemd. The screenshots and validation below describe observed behavior on the development setup.
 
 ## In action
 
@@ -25,7 +25,7 @@ These screenshots show the live Codex side panel during monitoring, quota recove
 
 ### Install the skill
 
-On the Linux host where the Goal runs, install the skill in `~/.agents/skills`. While this repository is private, clone it using a GitHub account with access.
+On the Linux host where the Goal runs, install the skill in `~/.agents/skills`.
 
 ```bash
 # Bash or Zsh
@@ -123,3 +123,7 @@ To validate another setup, select a Goal you already intend to run across a quot
 - [Goal Ledger](https://github.com/kingbootoshi/goal-ledger) records checkpoints and evidence alongside Goal mode.
 
 [Skill entry point](skills/auto-resume-goal/SKILL.md) · [Codex Goals](https://learn.chatgpt.com/docs/long-running-work) · [App Server protocol](https://learn.chatgpt.com/docs/app-server)
+
+## License
+
+[MIT](LICENSE)

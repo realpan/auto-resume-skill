@@ -6,7 +6,7 @@
 
 ![AutoResumeGoal](assets/hero-wordmark.webp)
 
-> 非公開レビュー版です。監視サービスは systemd を使用する Linux で動作します。
+> Linux 向けプレビュー版です。監視サービスは systemd を使用する Linux で動作します。
 
 ## 動作例
 
@@ -80,3 +80,7 @@ python3 -m unittest discover -s tests -v
 [Codex Auto Resume](https://github.com/progressrdx/codex-auto-resume) · [unsnooze](https://github.com/saaranshM/unsnooze) · [Goal Ledger](https://github.com/kingbootoshi/goal-ledger)
 
 [SKILL.md](skills/auto-resume-goal/SKILL.md) · [Codex Goals](https://learn.chatgpt.com/docs/long-running-work) · [App Server](https://learn.chatgpt.com/docs/app-server)
+
+## ライセンス
+
+[MIT](LICENSE)
