@@ -23,7 +23,7 @@ These screenshots show the live Codex side panel during monitoring, quota recove
 
 ### Install the skill
 
-Codex discovers user skills under `~/.agents/skills` or `$HOME\.agents\skills` in PowerShell. Install on the host where the Goal runs. While this repository is private, clone it using a GitHub account with access.
+On the Linux host where the Goal runs, install the skill in `~/.agents/skills`. While this repository is private, clone it using a GitHub account with access.
 
 ```bash
 # Bash or Zsh
@@ -33,25 +33,11 @@ mkdir -p "$HOME/.agents/skills"
 cp -R skills/auto-resume-goal "$HOME/.agents/skills/"
 ```
 
-```powershell
-git clone https://github.com/realpan/auto-resume-skill.git
-Set-Location auto-resume-skill
-$skills = Join-Path $HOME '.agents\skills'
-New-Item -ItemType Directory -Force -Path $skills | Out-Null
-Copy-Item -Recurse -Path '.\skills\auto-resume-goal' -Destination $skills
-```
-
 Check for an existing copy before installing. Verify that `$auto-resume-goal` appears in the skill picker. If it does not appear, restart Codex. [Codex skill discovery](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills)
 
 ### Run the quota monitor
 
 Skill discovery and quota monitoring have separate requirements. The commands above install the skill files. The background monitor needs a Linux environment with systemd and access to the App Server that owns the Goal.
-
-| Where Codex runs | AutoResumeGoal support |
-| --- | --- |
-| Linux with systemd | Tested on the development setup |
-| Windows with WSL2 | Candidate setup. Requires Codex and the monitor in the same WSL distribution. End-to-end validation is pending. |
-| Native Windows or macOS | The monitor requires a Linux host. Use a remote Linux project for the setup below. |
 
 ### Linux
 
@@ -78,21 +64,11 @@ $auto-resume-goal Migrate the date parser. Finish when the new parser handles al
 | Stop the monitor | `$auto-resume-goal stop` |
 | Pause or clear the Goal itself | Use the native Goal controls |
 
-### Windows with WSL2
-
-1. Install [WSL2 for Codex](https://learn.chatgpt.com/docs/windows/wsl) and enable [systemd in your distribution](https://learn.microsoft.com/windows/wsl/systemd).
-2. From the WSL shell, check that `systemctl --user list-units` connects and that `codex app-server daemon version` reports a running daemon. Sign in to Codex in that environment.
-3. Use the [Linux installation steps](#linux) inside WSL. Select a Goal owned by that WSL daemon, then run `$auto-resume-goal monitor this goal`. Check `$auto-resume-goal status` to confirm the monitor is running.
-
-Keep the WSL distribution running while monitoring. The monitor uses the WSL daemon's socket and the WSL user's skill directory. Side-panel access from the Windows client still needs validation.
-
 ### macOS or Windows with a remote Linux host
 
 1. Connect Codex to a Linux host with systemd, open a project on that host, and start the Goal in the remote chat.
 2. Run the [Linux installation steps](#linux) on the remote host as the user running Codex.
 3. In the remote chat, run `$auto-resume-goal monitor this goal`, then `$auto-resume-goal status` to confirm the monitor is running. The side panel requires the desktop client to reach the remote loopback service. The status command and host journal work independently of the panel.
-
-The native macOS and Windows runtimes would need their own background service integration and access to the App Server that owns the selected chat.
 
 ## How it works
 
