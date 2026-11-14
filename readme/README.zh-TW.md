@@ -1,10 +1,10 @@
 # AutoResumeGoal
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md)
+[English](../README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md)
 
 **額度恢復後，在原對話中自動繼續執行原生 Codex Goal。**
 
-![AutoResumeGoal](assets/hero-wordmark.webp)
+![AutoResumeGoal](../assets/hero-wordmark.webp)
 
 > Linux 預覽版。監控服務在使用 systemd 的 Linux 上執行。
 
@@ -14,7 +14,7 @@
 
 | 監控中 | 等待額度恢復 | 已確認繼續執行 |
 | :---: | :---: | :---: |
-| <img src="assets/screenshots/monitoring.png" width="250" alt="監控中"> | <img src="assets/screenshots/waiting-for-quota.png" width="250" alt="等待額度恢復"> | <img src="assets/screenshots/resumed.png" width="250" alt="已確認繼續執行"> |
+| <img src="../assets/screenshots/monitoring.png" width="250" alt="監控中"> | <img src="../assets/screenshots/waiting-for-quota.png" width="250" alt="等待額度恢復"> | <img src="../assets/screenshots/resumed.png" width="250" alt="已確認繼續執行"> |
 
 ## 快速開始
 
@@ -79,8 +79,8 @@ python3 -m unittest discover -s tests -v
 
 [Codex Auto Resume](https://github.com/progressrdx/codex-auto-resume) · [unsnooze](https://github.com/saaranshM/unsnooze) · [Goal Ledger](https://github.com/kingbootoshi/goal-ledger)
 
-[SKILL.md](skills/auto-resume-goal/SKILL.md) · [Codex Goals](https://learn.chatgpt.com/docs/long-running-work) · [App Server](https://learn.chatgpt.com/docs/app-server)
+[SKILL.md](../skills/auto-resume-goal/SKILL.md) · [Codex Goals](https://learn.chatgpt.com/docs/long-running-work) · [App Server](https://learn.chatgpt.com/docs/app-server)
 
 ## 授權條款
 
-[MIT](LICENSE)
+[MIT](../LICENSE)

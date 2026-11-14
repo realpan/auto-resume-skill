@@ -1,10 +1,10 @@
 # AutoResumeGoal
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md)
+[English](../README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md)
 
 **利用枠が回復すると、同じチャットで Codex の Goal を自動で再開します。**
 
-![AutoResumeGoal](assets/hero-wordmark.webp)
+![AutoResumeGoal](../assets/hero-wordmark.webp)
 
 > Linux 向けプレビュー版です。監視サービスは systemd を使用する Linux で動作します。
 
@@ -14,7 +14,7 @@
 
 | 監視中 | 利用枠の回復待ち | 再開を確認 |
 | :---: | :---: | :---: |
-| <img src="assets/screenshots/monitoring.png" width="250" alt="監視中"> | <img src="assets/screenshots/waiting-for-quota.png" width="250" alt="利用枠の回復待ち"> | <img src="assets/screenshots/resumed.png" width="250" alt="再開を確認"> |
+| <img src="../assets/screenshots/monitoring.png" width="250" alt="監視中"> | <img src="../assets/screenshots/waiting-for-quota.png" width="250" alt="利用枠の回復待ち"> | <img src="../assets/screenshots/resumed.png" width="250" alt="再開を確認"> |
 
 ## クイックスタート
 
@@ -79,8 +79,8 @@ python3 -m unittest discover -s tests -v
 
 [Codex Auto Resume](https://github.com/progressrdx/codex-auto-resume) · [unsnooze](https://github.com/saaranshM/unsnooze) · [Goal Ledger](https://github.com/kingbootoshi/goal-ledger)
 
-[SKILL.md](skills/auto-resume-goal/SKILL.md) · [Codex Goals](https://learn.chatgpt.com/docs/long-running-work) · [App Server](https://learn.chatgpt.com/docs/app-server)
+[SKILL.md](../skills/auto-resume-goal/SKILL.md) · [Codex Goals](https://learn.chatgpt.com/docs/long-running-work) · [App Server](https://learn.chatgpt.com/docs/app-server)
 
 ## ライセンス
 
-[MIT](LICENSE)
+[MIT](../LICENSE)

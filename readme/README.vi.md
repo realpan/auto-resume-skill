@@ -1,10 +1,10 @@
 # AutoResumeGoal
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md)
+[English](../README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md)
 
 **Tự động tiếp tục Goal của Codex trong cùng cuộc trò chuyện khi hạn mức sử dụng được khôi phục.**
 
-![AutoResumeGoal](assets/hero-wordmark.webp)
+![AutoResumeGoal](../assets/hero-wordmark.webp)
 
 > Bản xem trước cho Linux. Dịch vụ theo dõi chạy trên Linux có systemd.
 
@@ -14,7 +14,7 @@ Bảng bên hiển thị trạng thái Goal, thời điểm kiểm tra hạn m�
 
 | Đang theo dõi | Chờ khôi phục hạn mức | Đã xác nhận tiếp tục |
 | :---: | :---: | :---: |
-| <img src="assets/screenshots/monitoring.png" width="250" alt="Đang theo dõi"> | <img src="assets/screenshots/waiting-for-quota.png" width="250" alt="Chờ khôi phục hạn mức"> | <img src="assets/screenshots/resumed.png" width="250" alt="Đã xác nhận tiếp tục"> |
+| <img src="../assets/screenshots/monitoring.png" width="250" alt="Đang theo dõi"> | <img src="../assets/screenshots/waiting-for-quota.png" width="250" alt="Chờ khôi phục hạn mức"> | <img src="../assets/screenshots/resumed.png" width="250" alt="Đã xác nhận tiếp tục"> |
 
 ## Bắt đầu nhanh
 
@@ -79,8 +79,8 @@ Các bài kiểm thử bao gồm lịch đặt lại, kiểm tra hạn mức, nh
 
 [Codex Auto Resume](https://github.com/progressrdx/codex-auto-resume) · [unsnooze](https://github.com/saaranshM/unsnooze) · [Goal Ledger](https://github.com/kingbootoshi/goal-ledger)
 
-[SKILL.md](skills/auto-resume-goal/SKILL.md) · [Codex Goals](https://learn.chatgpt.com/docs/long-running-work) · [App Server](https://learn.chatgpt.com/docs/app-server)
+[SKILL.md](../skills/auto-resume-goal/SKILL.md) · [Codex Goals](https://learn.chatgpt.com/docs/long-running-work) · [App Server](https://learn.chatgpt.com/docs/app-server)
 
 ## Giấy phép
 
-[MIT](LICENSE)
+[MIT](../LICENSE)
