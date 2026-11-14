@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutoResumeGoal</title>
+<style>
+  :root { color-scheme: light dark; font: 14px/1.5 Inter, system-ui, sans-serif; }
+  body { margin: 0; background: Canvas; color: CanvasText; }
+  main { max-width: 30rem; margin: auto; padding: 20px; }
+  h1 { font-size: 18px; margin: 0 0 14px; }
+  #state { font-weight: 650; margin: 0 0 8px; }
+  dl { margin: 0 0 16px; }
+  dl div { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px;
+    border-top: 1px solid color-mix(in srgb, CanvasText 16%, transparent); padding: 9px 0; }
+  dl div[hidden] { display: none; }
+  dd { margin: 0; overflow-wrap: anywhere; }
+  dt { color: GrayText; }
+  button { font: inherit; padding: 6px 12px; border-radius: 7px; }
+  #notice { margin: 8px 0 0; }
+</style>
+<main>
+  <h1>AutoResumeGoal</h1>
+  <p id="state" role="status" data-text="loading">Reading status…</p>
+  <dl>
+    <div><dt data-text="goalLabel">Native Goal</dt><dd id="goal">—</dd></div>
+    <div id="check-row" hidden><dt data-text="checkLabel">Next quota check</dt><dd id="check">—</dd></div>
+    <div id="resume-row" hidden><dt data-text="resumeLabel">Last confirmed resume</dt><dd id="resume">—</dd></div>
+    <div id="reason-row" hidden><dt data-text="reasonLabel">Why monitoring stopped</dt><dd id="reason">—</dd></div>
+  </dl>
+  <button type="button" id="stop" data-text="stop" disabled>Stop auto-resume</button>
+  <p id="notice" role="status"></p>
+</main>
+<script>
+  const byId = (id) => document.getElementById(id);
+  const copy = {
+    en: {
+      loading: "Reading status…", goalLabel: "Native Goal", checkLabel: "Next quota check",
+      resumeLabel: "Last confirmed resume", reasonLabel: "Why monitoring stopped", stop: "Stop auto-resume",
+      waiting: "Waiting for quota", monitoring: "Monitoring", ended: "Monitoring ended",
+      off: "Auto-resume is off", unavailable: "Status unavailable",
+      stopped: "Stopped manually", stopping: "Stopping…", stopFailed: "Could not confirm the monitor stopped.",
+      removed: "Goal removed or replaced", unconfirmed: "Continuation could not be confirmed",
+      readFailed: "Could not verify App Server state",
+      goal: {active: "Active", paused: "Paused", blocked: "Blocked", complete: "Complete",
+        usageLimited: "Usage limited", budgetLimited: "Goal budget exhausted", none: "No Goal"},
+    },
+    "zh-CN": {
+      loading: "正在读取状态…", goalLabel: "原生 Goal", checkLabel: "下次额度检查",
+      resumeLabel: "最近确认续跑", reasonLabel: "结束原因", stop: "停止自动恢复",
+      waiting: "等待额度恢复", monitoring: "监控中", ended: "监控已结束",
+      off: "自动恢复未开启", unavailable: "状态暂不可用",
+      stopped: "手动停止自动恢复", stopping: "正在停止…", stopFailed: "未能确认监控已停止。",
+      removed: "Goal 已移除或替换", unconfirmed: "未能确认原聊天已续跑",
+      readFailed: "无法确认 App Server 状态",
+      goal: {active: "进行中", paused: "已暂停", blocked: "已阻塞", complete: "已完成",
+        usageLimited: "额度受限", budgetLimited: "目标预算耗尽", none: "无目标"},
+    },
+    "zh-TW": {
+      loading: "正在讀取狀態…", goalLabel: "原生 Goal", checkLabel: "下次額度檢查",
+      resumeLabel: "最近確認續跑", reasonLabel: "結束原因", stop: "停止自動恢復",
+      waiting: "等待額度恢復", monitoring: "監控中", ended: "監控已結束",
+      off: "自動恢復未開啟", unavailable: "狀態暫時無法取得",
+      stopped: "手動停止自動恢復", stopping: "正在停止…", stopFailed: "無法確認監控已停止。",
+      removed: "Goal 已移除或替換", unconfirmed: "無法確認原對話已繼續執行",
+      readFailed: "無法確認 App Server 狀態",
+      goal: {active: "進行中", paused: "已暫停", blocked: "已阻塞", complete: "已完成",
+        usageLimited: "額度受限", budgetLimited: "目標預算用完", none: "沒有 Goal"},
+    },
+    ja: {
+      loading: "状態を確認しています…", goalLabel: "Codex のゴール", checkLabel: "次回の利用枠確認",
+      resumeLabel: "前回の再開確認", reasonLabel: "監視の終了理由", stop: "自動再開を停止",
+      waiting: "利用枠の回復待ち", monitoring: "監視中", ended: "監視終了",
+      off: "自動再開は無効です", unavailable: "状態を取得できません",
+      stopped: "手動で停止しました", stopping: "停止しています…", stopFailed: "監視の停止を確認できませんでした。",
+      removed: "ゴールが削除または置き換えられました", unconfirmed: "元のチャットでの再開を確認できませんでした",
+      readFailed: "App Server の状態を確認できませんでした",
+      goal: {active: "進行中", paused: "一時停止中", blocked: "進行不可", complete: "完了",
+        usageLimited: "利用上限に到達", budgetLimited: "ゴールの予算を使い切りました", none: "ゴールなし"},
+    },
+    ko: {
+      loading: "상태를 확인하는 중…", goalLabel: "Codex 목표", checkLabel: "다음 사용량 한도 확인",
+      resumeLabel: "마지막 재개 확인", reasonLabel: "모니터링 종료 사유", stop: "자동 재개 중지",
+      waiting: "사용량 한도 초기화 대기 중", monitoring: "모니터링 중", ended: "모니터링 종료",
+      off: "자동 재개가 꺼져 있습니다", unavailable: "상태를 확인할 수 없습니다",
+      stopped: "수동으로 중지함", stopping: "중지하는 중…", stopFailed: "모니터링이 중지됐는지 확인할 수 없습니다.",
+      removed: "목표가 삭제되거나 변경됨", unconfirmed: "원래 채팅에서 재개됐는지 확인할 수 없습니다",
+      readFailed: "App Server 상태를 확인할 수 없습니다",
+      goal: {active: "진행 중", paused: "일시 정지", blocked: "진행 불가", complete: "완료",
+        usageLimited: "사용량 한도에 도달", budgetLimited: "목표 예산 소진", none: "목표 없음"},
+    },
+    vi: {
+      loading: "Đang kiểm tra trạng thái…", goalLabel: "Mục tiêu Codex", checkLabel: "Lần kiểm tra hạn mức tiếp theo",
+      resumeLabel: "Lần tiếp tục đã xác nhận gần nhất", reasonLabel: "Lý do ngừng theo dõi", stop: "Tắt tự động tiếp tục",
+      waiting: "Đang chờ khôi phục hạn mức", monitoring: "Đang theo dõi", ended: "Đã ngừng theo dõi",
+      off: "Tính năng tự động tiếp tục đang tắt", unavailable: "Không thể đọc trạng thái",
+      stopped: "Đã dừng thủ công", stopping: "Đang dừng…", stopFailed: "Không thể xác nhận đã ngừng theo dõi.",
+      removed: "Mục tiêu đã bị xóa hoặc thay thế", unconfirmed: "Không thể xác nhận cuộc trò chuyện ban đầu đã tiếp tục",
+      readFailed: "Không thể xác nhận trạng thái App Server",
+      goal: {active: "Đang thực hiện", paused: "Đã tạm dừng", blocked: "Đang bị chặn", complete: "Đã hoàn thành",
+        usageLimited: "Đã chạm hạn mức sử dụng", budgetLimited: "Đã hết ngân sách của mục tiêu", none: "Không có mục tiêu"},
+    },
+  };
+  function supportedLanguage(tag) {
+    if (/^zh(?:-|$)/i.test(tag)) {
+      return /(?:^|-)(Hant|TW|HK|MO)(?:-|$)/i.test(tag) ? "zh-TW" : "zh-CN";
+    }
+    const language = (tag || "").toLowerCase().split("-")[0];
+    return Object.hasOwn(copy, language) ? language : null;
+  }
+  const requested = new URLSearchParams(location.search).get("lang") ?? location.hash.slice(1);
+  const locale = supportedLanguage(requested) ||
+    (navigator.languages || [navigator.language]).map(supportedLanguage).find(Boolean) || "en";
+  const labels = copy[locale];
+  document.documentElement.lang = locale;
+  for (const element of document.querySelectorAll("[data-text]")) {
+    element.textContent = labels[element.dataset.text];
+  }
+  let stopping = false;
+  let manuallyStopped = false;
+  let request = 0;
+  function row(id, value) {
+    byId(id + "-row").hidden = !value;
+    byId(id).textContent = value || "";
+  }
+  function localTime(value) {
+    if (!value) return null;
+    const stamp = value.replace(/^(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2}) ([+-]\d{2})(\d{2})$/, "$1T$2$3:$4");
+    const date = new Date(stamp);
+    return Number.isNaN(date.getTime()) ? value : date.toLocaleString(locale, {hour12: false});
+  }
+  function endReason(reason) {
+    const native = "Stopped: native Goal is ";
+    if (reason?.startsWith(native)) return labels.goal[reason.slice(native.length)] || reason;
+    if (reason === "Stopped: Goal removed or replaced") return labels.removed;
+    if (reason === "Stopped: App Server state could not be verified") return labels.readFailed;
+    if (reason?.startsWith("Stopped: continuation unconfirmed") ||
+        reason?.startsWith("Stopped during resume:")) return labels.unconfirmed;
+    return reason;
+  }
+  async function refresh() {
+    const version = ++request;
+    try {
+      const response = await fetch("status", {cache: "no-store"});
+      if (!response.ok) throw new Error("status");
+      const status = await response.json();
+      if (version !== request) return;
+      const active = status.monitor === "active";
+      if (active) manuallyStopped = false;
+      byId("goal").textContent = labels.goal[status.goal] || labels.unavailable;
+      byId("state").textContent = active
+        ? (status.goal === "usageLimited" ? labels.waiting : labels.monitoring)
+        : (status.reason || manuallyStopped || status.monitor === "failed" ? labels.ended
+           : status.monitor === "unknown" ? labels.unavailable : labels.off);
+      row("check", localTime(status.nextCheck));
+      row("resume", localTime(status.lastResume));
+      row("reason", manuallyStopped ? labels.stopped : endReason(status.reason));
+      byId("stop").disabled = !active || stopping;
+    } catch {
+      if (version !== request) return;
+      byId("state").textContent = labels.unavailable;
+      byId("goal").textContent = "—";
+      for (const id of ["check", "resume", "reason"]) row(id, null);
+      byId("stop").disabled = true;
+    }
+  }
+  byId("stop").addEventListener("click", async () => {
+    stopping = true;
+    byId("stop").disabled = true;
+    byId("notice").textContent = labels.stopping;
+    try {
+      const response = await fetch("stop", {method: "POST", headers: {"X-Panel-Action": "stop"}});
+      if (!response.ok || !(await response.json()).stopped) throw new Error("stop");
+      manuallyStopped = true;
+      byId("notice").textContent = "";
+    } catch {
+      byId("notice").textContent = labels.stopFailed;
+    } finally {
+      stopping = false;
+      await refresh();
+    }
+  });
+  async function poll() {
+    await refresh();
+    setTimeout(poll, 10000);
+  }
+  poll();
+</script>
+</html>

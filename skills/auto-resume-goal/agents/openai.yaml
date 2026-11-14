@@ -1,0 +1,3 @@
+interface:
+  display_name: "AutoResumeGoal"
+  short_description: "Resume native Codex Goals when ordinary quota recovers"
