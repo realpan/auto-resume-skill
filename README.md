@@ -1,5 +1,7 @@
 # AutoResumeGoal
 
+[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md)
+
 **Resume a native Codex Goal in the same chat after your usage quota recovers.**
 
 ![AutoResumeGoal banner showing a paused Goal, a clock, and a play symbol](assets/hero-wordmark.webp)
